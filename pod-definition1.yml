@@ -2,12 +2,16 @@
 apiVersion: v1
 kind: Pod
 metadata:
-  name: jdk-pod
-  namespace: test-ns
+  name: redis-pod
   labels:
     author: mafike
 spec:
   containers:
-    - name: ghost
-      image: ghost
-...
+    - name: redis
+      image: redis
+      VolumeMounts:
+        - name: redis-volume
+          mountPath: /data/redis
+  volumes:
+    - name: redis-volume
+      emptyDir: {}
