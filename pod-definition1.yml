@@ -9,7 +9,7 @@ spec:
   containers:
     - name: redis
       image: redis
-      VolumeMounts:
+      volumeMounts:
         - name: redis-volume
           mountPath: /data/redis
   volumes:

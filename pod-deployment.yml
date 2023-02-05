@@ -1,0 +1,27 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: jenkins-dp
+  labels:
+    type: ci-cd
+    author: mafike
+
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      type: jenkins-dp
+  template:
+    metadata:
+      name: jenkins-pod
+      labels:
+        type: ci-cd
+        author: mafike
+    spec:
+      containers:
+        - name: jenkins-pod
+          image: jenkins/jenkins
+          ports:
+            - containerPort: 8080
+              hostPort: 8080
