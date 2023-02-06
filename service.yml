@@ -8,9 +8,7 @@ metadata:
     author: mafike
 spec:
   ports:
-    - targetPort: 8080
-      port: 80
-      nodePort: 30001
-  type: LoadBalancer
+    - targetPort: 5432
+      port: 5432
   selector:
     postgres-dp

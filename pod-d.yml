@@ -22,5 +22,23 @@ spec:
         - name: mypostgres
           image: postgres
           env:
+            - name: POSTGRES_ROOT_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                   name: postgres-secret
+                   key: password
+            - name: POSTGRES_ROOT_USER
+              valueFrom:
+                secretKeyRef:
+                  name: postgres-secret
+                  key: user
+            - name: POSTGRES_ROOT_DB
+              valueFrom:
+                secretKeyRef:
+                  name: postgres-secret
+                  key: db
+
+
+
 
 
