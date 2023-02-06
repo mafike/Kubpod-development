@@ -1,0 +1,26 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: postgres-dp
+  labels:
+    type: db
+    author: mafike
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      name: postgres-dp
+  template:
+    metadata:
+      name: postgres-pod
+      labels:
+        type: postgres-dp
+        author: mafike
+    spec:
+      containers:
+        - name: mypostgres
+          image: postgres
+          env:
+
+
