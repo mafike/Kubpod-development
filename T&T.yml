@@ -1,0 +1,17 @@
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: nginx-pod
+  labels:
+    author: mafike
+spec:
+  containers:
+    - name: nginx
+      image: nginx
+  tolerations:
+    - key: "slave"
+      operator: "Equal"
+      value: "node"
+      effect: "NoSchedule"
+...

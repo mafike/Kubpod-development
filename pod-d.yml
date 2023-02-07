@@ -37,6 +37,33 @@ spec:
                 secretKeyRef:
                   name: postgres-secret
                   key: db
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: postgres-dp
+  labels:
+    type: postgres-dp-service
+    author: mafike
+spec:
+  ports:
+    - targetPort: 5432
+      port: 5432
+  selector:
+    name: postgres-dp
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: postgres-secrets
+type: Opaque
+stringData:
+ password: mafike
+ user: maike
+ db: mafike
+...
+
+
 
 
 
