@@ -1,0 +1,55 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: db-dp
+  labels:
+    type: db
+    author: mafike
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      name: db-dp
+  template:
+    metadata:
+      name: db-pod
+      labels:
+        type: db-pod
+        author: mafike
+    spec:
+      containers:
+        - name: mydb
+          image: mysql
+          env:
+            - name: MYSQL_ROOT_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: mydb-secret
+                  key: password
+
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: mydb-secret
+type: Opaque
+stringData:
+  password: mafike
+  user: mafike
+  db: mafike
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: mydb
+  labels:
+    type: mydb-service
+    author: mafike
+spec:
+  ports:
+    - targetPort: 7367
+      port: 7367
+  selector:
+    name: db-dp
+
